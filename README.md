@@ -1,4 +1,5 @@
 # Moderation Discord Bot
+
 ## AI Features Powered by OpenModerator.com
 
 [![discord.js](https://img.shields.io/github/package-json/dependency-version/KevinNovak/Discord-Bot-TypeScript-Template/discord.js)](https://discord.js.org/)
@@ -13,9 +14,11 @@ This bot was built on a template created by [Kevin Novak](https://github.com/Kev
 
 ## Features
 
-### Built-In Bot Features:
+### AI Features:
 
-## AI features coming soon...
+-   Event listener checks the text of each message for profanity and deletes profane messages.
+
+### Non-AI Features:
 
 -   Basic command structure.
 -   Rate limits and command cooldowns.
@@ -37,6 +40,15 @@ This bot was built on a template created by [Kevin Novak](https://github.com/Kev
 
 -   Supports [sharding](https://discordjs.guide/sharding/) which is required when your bot is in 2500+ servers.
 -   Supports [clustering](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template-Master-Api) which allows you to run your bot on multiple machines.
+
+## Event Listener
+
+## messageCreate
+
+The `messageCreate` event listener checks the text of each message for profanity and deletes profane messages. In order
+to use this feature, you must have an API key from OpenModerator.com and set OPEN_MODERATOR_API_KEY in your .env file. You can sign up for an API key at [OpenModerator.com](https://openmoderator.com).
+
+Note: the bot will not delete server admins' messages unless you grant the bot Administrator permissions in Server Settings -> Roles -> OpenModerator -> Permissions -> Advanced Permissions (this is not default)
 
 ## Commands
 

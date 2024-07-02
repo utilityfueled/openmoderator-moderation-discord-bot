@@ -1,5 +1,5 @@
 import { REST } from '@discordjs/rest';
-import { Options, Partials } from 'discord.js';
+import { Message, Options, Partials } from 'discord.js';
 import { createRequire } from 'node:module';
 
 import { Button } from './buttons/index.js';
@@ -31,6 +31,7 @@ import {
     JobService,
     Logger,
 } from './services/index.js';
+import { checkMessageForProfanity } from './services/message-moderation.js';
 import { Trigger } from './triggers/index.js';
 
 const require = createRequire(import.meta.url);
@@ -93,6 +94,21 @@ async function start(): Promise<void> {
     let triggerHandler = new TriggerHandler(triggers, eventDataService);
     let messageHandler = new MessageHandler(triggerHandler);
     let reactionHandler = new ReactionHandler(reactions, eventDataService);
+
+    // Add message listener
+    client.on('messageCreate', async (message: Message) => {
+        if (message.author.bot) return; // Ignore messages from bots
+        if (!message.content || message.content.trim().length === 0) return; // Ignore empty messages
+
+        const isProfane = await checkMessageForProfanity(message);
+        if (isProfane) {
+            try {
+                await message.delete();
+            } catch (error) {
+                console.error('Error deleting message:', error);
+            }
+        }
+    });
 
     // Jobs
     let jobs: Job[] = [
