@@ -15,7 +15,8 @@ This bot was built on a template created by [Kevin Novak](https://github.com/Kev
 
 ### Built-In Bot Features:
 
--   AI features coming soon.
+## AI features coming soon...
+
 -   Basic command structure.
 -   Rate limits and command cooldowns.
 -   Welcome message when joining a server.
